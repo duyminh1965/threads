@@ -18,25 +18,24 @@ interface Props {
   userId: string;
 }
 
-function PostThread({ userId }: Props) {  
+function PostThread( { userId }: Props ) {  
   const router = useRouter();
   const pathname = usePathname();
 
   const { organization } = useOrganization();
 
-  const form = useForm({
+  const form = useForm<z.infer<typeof ThreadValidation>>({
     resolver: zodResolver(ThreadValidation),
     defaultValues:{
       thread: '',
       accountId: userId,
     }
-  })
-
-  const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {    
+  })    
+  const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {     
     await createThread({ 
       text: values.thread,
       author: userId,
-      communityId: organization ? organization.id : null, 
+      communityId: organization ? organization.id : null,
       path: pathname
     });
     

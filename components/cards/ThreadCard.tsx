@@ -16,7 +16,7 @@ interface progs {
     id: string;
     name: string;
     image: string;
-  } | null;
+  } ;
   createdAt: string;
   comments: {
     author: {
@@ -81,12 +81,14 @@ const ThreadCard = ({
         </div>
         {/* TODO: DeleteThread */}
         {/* TODO: Show comment logos */}
-        {console.log("Chon 1", community)}
-        {!isComment && community && (
+        {/* console.log('comment: -- :'+ community) */}                     
+      </div>   
+      
+      {!isComment && community && (
           <Link href={`/communities/${community.id}`} className="mt-5 flex items-center">
             <p className="text-subtle-medium text-gray-1">
               {formatDateString(createdAt)}
-              - {community.name} Community
+              {" "} - {community.name} Community
             </p>
             <Image
               src={community.image}
@@ -97,8 +99,6 @@ const ThreadCard = ({
             />
           </Link>
         )}
-        
-      </div>      
     </article>
   )
 }
